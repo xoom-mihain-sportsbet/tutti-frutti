@@ -33,5 +33,5 @@ export const getFruitsListFromAPI = (): AppThunk => (
 			dispatch(getFruitsListRequestSuccess(response))
 		},
         dispatch(getFruitsListRequestError)
-    )
+    );
 }

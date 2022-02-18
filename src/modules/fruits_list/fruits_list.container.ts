@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import FruitsList from "./fruits_list";
 import { Fruit, TuttiFruttiState } from "./fruits_list.modules";
-import { getFruitsListFromAPI } from "/Users/andreai/Work/tutti-frutti/src/app/actions/fruits_list";
+import { getFruitsListFromAPI } from "../../app/actions/fruits_list";
 
 interface StateProps {
     fruitsList: Fruit[]
