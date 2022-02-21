@@ -1,20 +1,20 @@
 import React from "react";
 import { BrowserRouter as Router, Route, BrowserRouter, Routes } from "react-router-dom";
-import FruitDetails from './modules/fruit_details/fruit_details';
-import ShoppingList from './modules/shopping_list/shopping_list';
+import Favorites from './modules/favorites_list/favorites_list';
+import QuoteDetails from "./modules/quote_details/quote_details";
 import NotFound from './not_found';
 import SideBar from './layout';
-import { FruitsListContainer } from "./modules/fruits_list/fruits_list.container";
+import { QuotesContainer } from "./modules/quotes_list/quotes_list.container";
 
 
-export default function TuttiFruttiRouters() {
+export default function SimpsonsRouters() {
     return(
         <BrowserRouter>
         <SideBar/>
         <Routes>
-                <Route path="/" element={<FruitsListContainer/>} />
-                <Route path="details/:id:" element={<FruitDetails/>} />
-                <Route path="shoppingList" element={<ShoppingList/>} />
+                <Route path="/" element={<QuotesContainer/>} />
+                <Route path="details/character:" element={<QuoteDetails/>}/>
+                <Route path="favorites" element={<Favorites/>} />
                 <Route path="*" element={<NotFound />} />
         </Routes>
         </BrowserRouter>

@@ -8,14 +8,14 @@ const titleStyle = style({
 })
   
 
-function fruit_details() {
+function quoteDetails() {
   return (
     <div>
       <header className={titleStyle}>
-        Fruit details
+        Quote Details
       </header>
     </div>
   );
 }
 
-export default fruit_details;
+export default quoteDetails;

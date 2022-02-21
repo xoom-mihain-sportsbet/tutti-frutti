@@ -1,8 +1,8 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import { fruitsListReducers } from './reducers/fruits_list';
+import { quotesListReducers } from './reducers/wines_list';
 
 export const store = configureStore({
-  reducer: {fruitsListReducers},
+  reducer: {quotesListReducers},
 });
 
 export type AppDispatch = typeof store.dispatch;

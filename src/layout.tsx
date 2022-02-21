@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { style } from 'typestyle';
 
-const logo = require('../src/images/logo.png');
+const logo = require('../src/images/download.png');
 
 const sidebarMenu = style({
     width: '15%',
@@ -31,39 +31,34 @@ const menuItemLinks = style({
 })
 
 const logoImage = style({
-    width: '80%',
+    width: '100%',
     alignItems: 'center',
-    padding: '1rem 0 1.25rem 1rem',
+    padding: '1rem 0 0 0',
 })
     
 const sidebarData = [
     {
-        title: 'Fruits List',
+        title: 'Quotes',
         path: '/'
     },
+
     {
-        title: 'Fruit Details',
-        path: '/details/:id:'
+        title: 'Favorites',
+        path: '/favorites'
     },
-    {
-        title: 'Shopping List',
-        path: '/shoppingList'
-    }
 ]
 
 export default function SideBar() {
     return (
-        <div>
-            <nav className={sidebarMenu}>
+        <nav className={sidebarMenu}>
             <img alt='logo' src={String(logo)} className={logoImage}/>
-                {sidebarData.map((item, index) => {
-                    return (
-                        <Link key={index} className={menuItemLinks} to={item.path}>
-                            <span>{item.title}</span>
-                        </Link>
-                    )
-                })}
-            </nav>
-        </div>
+            {sidebarData.map((item, index) => {
+                return (
+                    <Link key={index} className={menuItemLinks} to={item.path}>
+                        <span>{item.title}</span>
+                    </Link>
+                )
+            })}
+        </nav>
     );
 }

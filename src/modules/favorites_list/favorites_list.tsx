@@ -8,14 +8,14 @@ const titleStyle = style({
 })
   
 
-function shoppingList() {
+function favoritesList() {
   return (
     <div>
       <header className={titleStyle}>
-        Shopping List
+        Favorites List
       </header>
     </div>
   );
 }
 
-export default shoppingList;
+export default favoritesList;

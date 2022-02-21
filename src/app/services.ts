@@ -1,17 +1,17 @@
-import {Fruit} from '../modules/fruits_list/fruits_list.modules';
+import {Quote} from '../modules/quotes_list/quotes_list.modules';
 
-const API_BASE_URL = 'https://www.fruityvice.com';
-const GET_ALL_FRUITS_URL = '/api/fruit/all';
+const API_BASE_URL = 'https://thesimpsonsquoteapi.glitch.me/quotes';
+const GET_FIRST_TEN_QUOTES_URL = '?count=10'
 
-export default function getAllFruitsHttpRequest(): Promise<Fruit[]> {
-    return fetch(`${API_BASE_URL}${GET_ALL_FRUITS_URL}`, {
-        mode: 'no-cors',
+export default async function getQuotesHttpRequest(): Promise<Quote[]> {
+    return fetch(`${API_BASE_URL}${GET_FIRST_TEN_QUOTES_URL}`, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        }
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        mode: 'no-cors'
     })
-    .then(res => res.json())
-    .catch(console.error);
+    .then(response => response.json())
+    .catch(() => {});
 }
