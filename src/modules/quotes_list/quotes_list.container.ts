@@ -1,4 +1,3 @@
-import React from "react";
 import { connect } from "react-redux";
 import QuotesList from "./quotes_list";
 import { Quote, QuoteState } from "./quotes_list.modules";

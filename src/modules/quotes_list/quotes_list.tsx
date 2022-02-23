@@ -1,10 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import { style } from 'typestyle';
 import { QuotesListProps } from './quotes_list.container';
 import { TailSpin } from 'react-loader-spinner';
-import { useSelector } from 'react-redux';
-import { QuoteState } from './quotes_list.modules';
 import QuotesCards from './quotes_cards';
 
 const pageStyle = style({
@@ -29,13 +26,24 @@ const loadingStyle = style({
   marginTop: '10%'
 })
 
+const cardAria = style({
+  marginTop: "5%",
+  display: 'flex',
+  justifyContent: 'center',
+})
+
+
 export const QuotesList: React.FunctionComponent<QuotesListProps> = props => {
-  const loading = useSelector((state: QuoteState) => state.quotesListReducers.isFetchingQuotes)
-  const error = useSelector((state: QuoteState) => state.quotesListReducers.quotesListHasError)
+  const quotesObjectToList = Object.keys(props.quotesList).map((quoteFromObject: any) => props.quotesList[quoteFromObject]);
+  const [isLoading, setIsLoading] = useState(true);
 
   React.useEffect(() => {
-      props.getQuotesListFromAPI();
+    props.getQuotesListFromAPI();
   }, []);
+
+  React.useEffect(() => {
+    setIsLoading(props.isFetchingQuotes);
+  }, [props.isFetchingQuotes])
 
   return (
     <div className={pageStyle}>
@@ -44,21 +52,24 @@ export const QuotesList: React.FunctionComponent<QuotesListProps> = props => {
       </header>
 
       <div>
-        {loading && 
-          (<div className={loadingStyle}>
-              <TailSpin color="#00ab9a" height={50} width={50}/>
-              <p>Loading...</p>
+        {isLoading ? 
+        (
+        <div className={loadingStyle}>
+            <TailSpin color="#00ab9a" height={50} width={50}/>
+            <p>Loading...</p>
+        </div>
+        ) :
+        (
+        <div className={cardAria}>
+          <div className="card-group ml-5">
+            {quotesObjectToList.map((item, index) => {
+              return(
+                <QuotesCards quote={item} index={index}/>
+              )
+            })}
           </div>
-          )}
-        {/* {error && (<div>Something went wrong</div>)}  */}
-        {!loading && 
-          <QuotesCards 
-            quotesList={props.quotesList} 
-            quotesListHasError={props.quotesListHasError}
-            getQuotesListFromAPI = {props.getQuotesListFromAPI}
-            isFetchingQuotes = {props.isFetchingQuotes}
-          />
-        }
+        </div>
+        )}
       </div>
     </div>
   );
