@@ -13,7 +13,7 @@ export default function SimpsonsRouters() {
         <SideBar/>
         <Routes>
                 <Route path="/" element={<QuotesContainer/>} />
-                <Route path="details/character:" element={<QuoteDetails/>}/>
+                <Route path="details/:character" element={<QuoteDetails/>}/>
                 <Route path="favorites" element={<Favorites/>} />
                 <Route path="*" element={<NotFound />} />
         </Routes>

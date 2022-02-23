@@ -1,5 +1,5 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import { quotesListReducers } from './reducers/wines_list';
+import { quotesListReducers } from './reducers/quotes_list';
 
 export const store = configureStore({
   reducer: {quotesListReducers},

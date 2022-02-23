@@ -1,8 +1,11 @@
-import React, {useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { style } from 'typestyle';
 import { QuotesListProps } from './quotes_list.container';
-import { Quote } from './quotes_list.modules';
+import { TailSpin } from 'react-loader-spinner';
+import { useSelector } from 'react-redux';
+import { QuoteState } from './quotes_list.modules';
+import QuotesCards from './quotes_cards';
 
 const pageStyle = style({
   marginTop: "3%",
@@ -19,47 +22,43 @@ const titleStyle = style({
   fontSize: '40px',
 })
 
-const cardAria = style({
-  marginTop: "5%",
+const loadingStyle = style({ 
   display: 'flex',
-  justifyContent: 'center',
-  
+  flexDirection: 'column',
+  alignItems: 'center',
+  marginTop: '10%'
 })
-  
+
 export const QuotesList: React.FunctionComponent<QuotesListProps> = props => {
-  const [quotesLost, setQuotesList] = useState<Quote[]>([]);
+  const loading = useSelector((state: QuoteState) => state.quotesListReducers.isFetchingQuotes)
+  const error = useSelector((state: QuoteState) => state.quotesListReducers.quotesListHasError)
 
   React.useEffect(() => {
-    if(!props.isFetchingQuotes) {
       props.getQuotesListFromAPI();
-      console.log("Array of wines: ", props.quotesList);
-    }
-  }, [])
-
-  var hardcodedArray = 10;
+  }, []);
 
   return (
     <div className={pageStyle}>
       <header className={titleStyle}>
         Simpsons Quotes
       </header>
-  
-      <div className={cardAria}>
-        <div className="card-group">
-          {Array(hardcodedArray).join(".").split(".").map((item, index) => {
-            return (
-              <div key={index} className="col-sm-6 col-md-4 col-lg-2 md-ml-5">
-                <div className="card border-info" style={{width: '10rem'}}>
-                  <div className="card-body">
-                    <h5 className="card-title">Character</h5>
-                    <h6 className="card-subtitle mb-2 text-muted">Quote</h6>
-                    <Link to="details/:id:" className="btn btn-info">Quote Details</Link>
-                  </div>
-                </div>
-              </div> 
-            )
-          })}
-        </div>
+
+      <div>
+        {loading && 
+          (<div className={loadingStyle}>
+              <TailSpin color="#00ab9a" height={50} width={50}/>
+              <p>Loading...</p>
+          </div>
+          )}
+        {/* {error && (<div>Something went wrong</div>)}  */}
+        {!loading && 
+          <QuotesCards 
+            quotesList={props.quotesList} 
+            quotesListHasError={props.quotesListHasError}
+            getQuotesListFromAPI = {props.getQuotesListFromAPI}
+            isFetchingQuotes = {props.isFetchingQuotes}
+          />
+        }
       </div>
     </div>
   );
