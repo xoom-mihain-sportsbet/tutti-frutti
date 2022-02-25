@@ -29,10 +29,10 @@ function quotesList(state: Quote[] = [], action: any): Quote[] {
     switch(action.type) {
         case actions.GET_QUOTES_LIST_REQUEST_SUCCESS: {
             const successAction = action as actions.GetQuotesListRequestSuccessAction      
-            return {
+            return [
                 ...state,
                 ...successAction.response
-            }
+            ]
         }  
     }
     return state    
@@ -43,5 +43,3 @@ export const quotesListReducers = combineReducers({
     quotesListHasError,
     quotesList
 })
-
-// export type RootState = ReturnType<typeof quotesListReducers>

@@ -7,7 +7,7 @@ export interface QuoteState {
 }
 
 export interface Quote {
-    index: number,
+    index: string,
     quote: string,
     character: string,
     image: string,
@@ -16,5 +16,4 @@ export interface Quote {
 
 export interface QuotesCardsInterface {
     quote: Quote
-    index: number
 }

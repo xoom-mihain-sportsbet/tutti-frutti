@@ -3,6 +3,7 @@ import { style } from 'typestyle';
 import { QuotesListProps } from './quotes_list.container';
 import { TailSpin } from 'react-loader-spinner';
 import QuotesCards from './quotes_cards';
+import { Quote } from './quotes_list.modules';
 
 const pageStyle = style({
   marginTop: "3%",
@@ -34,7 +35,6 @@ const cardAria = style({
 
 
 export const QuotesList: React.FunctionComponent<QuotesListProps> = props => {
-  const quotesObjectToList = Object.keys(props.quotesList).map((quoteFromObject: any) => props.quotesList[quoteFromObject]);
   const [isLoading, setIsLoading] = useState(true);
 
   React.useEffect(() => {
@@ -62,9 +62,9 @@ export const QuotesList: React.FunctionComponent<QuotesListProps> = props => {
         (
         <div className={cardAria}>
           <div className="card-group ml-5">
-            {quotesObjectToList.map((item, index) => {
+            {props.quotesList.map((item) => {
               return(
-                <QuotesCards quote={item} index={index}/>
+                <QuotesCards key={item.index} quote={item}/>
               )
             })}
           </div>

@@ -1,5 +1,5 @@
 import { Quote } from "../../modules/quotes_list/quotes_list.modules";
-import addingIndexToQuoteObject from "../business_logic";
+import addingIndexToQuote from "../business_logic";
 import getQuotesHttpRequest from "../services";
 import { AppThunk } from "../store";
 
@@ -31,7 +31,7 @@ export const getQuotesListFromAPI = (): AppThunk => (
 
     return getQuotesHttpRequest().then(
 		response => {
-			dispatch(getQuotesListRequestSuccess(addingIndexToQuoteObject(response)))
+			dispatch(getQuotesListRequestSuccess(addingIndexToQuote(response)))
 		}).catch(error => {
             dispatch(getQuotesListRequestError)
         })

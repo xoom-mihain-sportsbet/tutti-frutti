@@ -1,7 +1,8 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+ import { set } from 'immer/dist/internal';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { style } from 'typestyle';
-import { QuotesListProps } from '../quotes_list/quotes_list.container';
+import { QuoteDetailsProps } from './quote_details.container';
 
 const titleStyle = style({
   display: 'flex',
@@ -10,29 +11,19 @@ const titleStyle = style({
 })
   
 
-export const QuotesDetails: React.FunctionComponent<any> = match => {
-  const {quoteCharacter} = match.params;
+export const QuoteDetails: React.FunctionComponent<QuoteDetailsProps> = (props) => {
+  let quoteToDisplay = props.quote;
 
-  // const quoteToDisplay: any = useSelector((state) =>
-  //   state.find((quote: { character: any; }) => quote.character = quoteCharacter))
-    
-    // if (!quoteToDisplay) {
-    //   return (
-    //     <section>
-    //       <h2>Quote not found!</h2>
-    //     </section>
-    //   )
-    // }
-  
     return (
       <section>
-        <article>
-          {/* <h2>{quoteToDisplay.character}</h2>
-          <p className="quote-content">{quoteToDisplay.quote}</p>
-          <img src={quoteToDisplay.image}/> */}
-        </article>
+  
+          <h3 className={titleStyle}>Quote Details</h3>
+          <p className={titleStyle}>{quoteToDisplay.quote}</p>
+          <p className={titleStyle}>{quoteToDisplay.character}</p>
+          <img alt='quote representive image' src={quoteToDisplay.image} className={titleStyle}/>
+          <p>{quoteToDisplay.characterDirection}</p>
       </section>
     )
 }
 
-export default QuotesDetails;
+export default QuoteDetails;
