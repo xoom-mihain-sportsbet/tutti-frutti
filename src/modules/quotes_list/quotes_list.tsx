@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-import { style } from 'typestyle';
+import { media, style } from 'typestyle';
 import { QuotesListProps } from './quotes_list.container';
 import { TailSpin } from 'react-loader-spinner';
 import QuotesCards from './quotes_cards';
-import { Quote } from './quotes_list.modules';
 
 const pageStyle = style({
   marginTop: "3%",
-  marginLeft: '15%',
-  marginInlineStart: '200px',
+  marginLeft: '16%',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
@@ -18,7 +16,11 @@ const titleStyle = style({
   display: 'flex',
   justifyContent: 'center',
   fontSize: '40px',
-})
+},
+media(
+  {maxWidth: '570px',}, 
+  {marginLeft: '16%'})
+)
 
 const loadingStyle = style({ 
   display: 'flex',
@@ -28,7 +30,7 @@ const loadingStyle = style({
 })
 
 const cardAria = style({
-  marginTop: "5%",
+  marginTop: "3%",
   display: 'flex',
   justifyContent: 'center',
 })

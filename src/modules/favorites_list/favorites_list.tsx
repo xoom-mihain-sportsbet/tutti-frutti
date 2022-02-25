@@ -1,5 +1,6 @@
 import React from 'react';
 import { style } from 'typestyle';
+import { FavoritesListProps } from './favorites_list.container';
 
 const titleStyle = style({
   display: 'flex',
@@ -8,7 +9,7 @@ const titleStyle = style({
 })
   
 
-function favoritesList() {
+export const FavoritesList: React.FunctionComponent<FavoritesListProps> = (props) => {
   return (
     <div>
       <header className={titleStyle}>
@@ -18,4 +19,4 @@ function favoritesList() {
   );
 }
 
-export default favoritesList;
+export default FavoritesList;

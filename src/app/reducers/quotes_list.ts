@@ -30,7 +30,6 @@ function quotesList(state: Quote[] = [], action: any): Quote[] {
         case actions.GET_QUOTES_LIST_REQUEST_SUCCESS: {
             const successAction = action as actions.GetQuotesListRequestSuccessAction      
             return [
-                ...state,
                 ...successAction.response
             ]
         }  
