@@ -1,11 +1,13 @@
 export interface Quote {
-    index: string,
+    id: string,
     quote: string,
     character: string,
     image: string,
     characterDirection: string,
+    isFavorite: boolean
 }
 
 export interface QuoteDetailsState {
-    quote: Quote
+    quote: Quote,
+    favoritesList: Quote[]
 }

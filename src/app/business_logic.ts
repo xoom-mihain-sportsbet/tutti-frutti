@@ -1,23 +1,20 @@
 import { Quote } from "../modules/quotes_list/quotes_list.modules";
+import uniqid from 'uniqid';
 
 export default function addingIndexToQuote(httpResponse: any): Quote[] {
-    return Object.keys(httpResponse).map((quoteFromObject: any, index) => ({
+    return Object.keys(httpResponse).map((quoteFromObject: any) => ({
         ...httpResponse[quoteFromObject],
-        index
+        id: uniqid()
     }));
 }
 
-// export function addToFavoritesList(quoteToAdd: Quote, favoritesList: Quote[]): Quote[] {
-//     let addArray = true;
-//     favoritesList.map((quote, index) => {
-//         if(quote.quote === quoteToAdd.quote) {
-//             favoritesList.splice(index, 1);
-//             addArray = false
-//         }
-//     });
+export function isQuoteInFavoritesList(selectedQuote: Quote, quoteList: Quote[]): boolean {
+    return quoteList.filter((quote) => quote.character === selectedQuote.character && quote.quote === selectedQuote.quote).length > 0;
+}
 
-//     if (addArray) {
-//         favoritesList.push(quoteToAdd);
-//     }
-//     return favoritesList;
-// }
+export function processQuoteList(favoriteQuoteList: Quote[], quoteList: Quote[]): Quote[] {
+     return quoteList.map((quote) => ({
+         ...quote, 
+        isFavorite: isQuoteInFavoritesList(quote, favoriteQuoteList)
+     }))
+}

@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, {useState } from 'react';
 import { media, style } from 'typestyle';
 import { QuotesListProps } from './quotes_list.container';
 import { TailSpin } from 'react-loader-spinner';
 import QuotesCards from './quotes_cards';
+import { processQuoteList } from '../../app/business_logic';
+import { Quote } from './quotes_list.modules';
 
 const pageStyle = style({
   marginTop: "3%",
@@ -38,6 +40,7 @@ const cardAria = style({
 
 export const QuotesList: React.FunctionComponent<QuotesListProps> = props => {
   const [isLoading, setIsLoading] = useState(true);
+  const [quoteListWithFavorites, setQuoteListWithFavorites] = useState([] as Array<Quote>);
 
   React.useEffect(() => {
     props.getQuotesListFromAPI();
@@ -45,7 +48,8 @@ export const QuotesList: React.FunctionComponent<QuotesListProps> = props => {
 
   React.useEffect(() => {
     setIsLoading(props.isFetchingQuotes);
-  }, [props.isFetchingQuotes])
+    setQuoteListWithFavorites(processQuoteList(props.favoritesList, props.quotesList));
+  }, [props.isFetchingQuotes, props.favoritesList])
 
   return (
     <div className={pageStyle}>
@@ -64,9 +68,15 @@ export const QuotesList: React.FunctionComponent<QuotesListProps> = props => {
         (
         <div className={cardAria}>
           <div className="card-group ml-5">
-            {props.quotesList.map((item) => {
+            {quoteListWithFavorites.map((item) => { 
               return(
-                <QuotesCards key={item.index} quote={item}/>
+                <QuotesCards 
+                  key={item.id} 
+                  quote={item}
+                  isFavorite={item.isFavorite}
+                  addQuoteToFavoritesList = {props.addQuoteToFavoritesList}
+                  removeFromFavoritesList = {props.removeFromFavoritesList}
+                />
               )
             })}
           </div>

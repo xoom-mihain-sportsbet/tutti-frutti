@@ -1,13 +1,16 @@
+
 export interface QuoteState {
     quotesListReducers: {
         quotesList: Quote[]
         isFetchingQuotes: boolean
         quotesListHasError: boolean
-    }
+    },
+    favoritesList: Quote[]
 }
 
 export interface Quote {
-    index: string,
+    isFavorite: any;
+    id: string,
     quote: string,
     character: string,
     image: string,
@@ -16,4 +19,7 @@ export interface Quote {
 
 export interface QuotesCardsInterface {
     quote: Quote
+    isFavorite: boolean
+    addQuoteToFavoritesList: (quote: Quote) => void
+    removeFromFavoritesList: (character: string, quote: string) => void
 }

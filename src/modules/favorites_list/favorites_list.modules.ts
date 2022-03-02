@@ -1,13 +1,18 @@
 export interface FavoritesState {
-    favoritesReducers: {
+    favoritesListReducers: {
         favoritesList: Quote[]
     }
 }
 
 export interface Quote {
-    index: string,
+    id: string,
     quote: string,
     character: string,
     image: string,
     characterDirection: string,
+}
+
+export interface FavoritesCardsInterface {
+    quote: Quote,
+    removeFromFavoritesList: (character: string, quote: string) => void
 }

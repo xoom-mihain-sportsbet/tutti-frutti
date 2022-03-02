@@ -1,6 +1,7 @@
 import React from 'react';
 import { IoIosHeart, IoIosHeartEmpty } from 'react-icons/io';
 import { media, style } from 'typestyle';
+import { isQuoteInFavoritesList } from '../../app/business_logic';
 import { QuoteDetailsProps } from './quote_details.container';
 
 const contentStyle = style({
@@ -41,10 +42,17 @@ export const QuoteDetails: React.FunctionComponent<QuoteDetailsProps> = (props) 
       Quote Details
     </header>
     <div className={contentStyle}>
-      <IoIosHeartEmpty style={{color: 'red', fontSize: '27px', marginTop: '2%', marginBottom: '2%'}}/>
-      {/* <IoIosHeart style={{color: 'red', fontSize: '27px', marginTop: '2%', marginBottom: '2%'}}/> */}
+      { isQuoteInFavoritesList(quoteToDisplay, props.favoritesList) ? (
+            <IoIosHeart style={{color: 'red', fontSize: '24px', marginLeft: '80%', marginTop: '2%'}} 
+                onClick={() => props.removeFromFavoritesList(quoteToDisplay.character, quoteToDisplay.quote)}
+            />
+          ) : (
+            <IoIosHeartEmpty style={{color: 'red', fontSize: '24px', marginLeft: '80%', marginTop: '2%'}}
+                onClick={() => props.addQuoteToFavoritesList(quoteToDisplay)}
+            />
+          )
+      }
       <div className="container-fluid">
-    
         <div className="row">
           <h6 className="col-sm-3 col-xl-3 text-muted">Character</h6>
           <div className="col-sm-9 col-xl-7 font-weight-bold">{quoteToDisplay.character}</div>
@@ -60,7 +68,6 @@ export const QuoteDetails: React.FunctionComponent<QuoteDetailsProps> = (props) 
             <img alt='quote' src={quoteToDisplay.image} className={imageStyle}/>
           </div>
         </div>
-
       </div>
     </div>
   </div>
