@@ -31,7 +31,8 @@ export const getQuotesListFromAPI = (): AppThunk => (
 
     return getQuotesHttpRequest().then(
 		response => {
-			dispatch(getQuotesListRequestSuccess(addingIndexToQuote(response)))
+            const responseWithIndex = addingIndexToQuote(response)
+			dispatch(getQuotesListRequestSuccess(responseWithIndex))
 		}).catch(error => {
             dispatch(getQuotesListRequestError)
         })

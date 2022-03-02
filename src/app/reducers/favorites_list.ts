@@ -1,7 +1,6 @@
-import {combineReducers } from "@reduxjs/toolkit"
+import { combineReducers } from "@reduxjs/toolkit"
 import { Quote } from "../../modules/quotes_list/quotes_list.modules"
 import * as actions from "../actions/favorites_list";
-import { isQuoteInFavoritesList } from "../business_logic";
 
 const initialState: Quote[] = [];
 

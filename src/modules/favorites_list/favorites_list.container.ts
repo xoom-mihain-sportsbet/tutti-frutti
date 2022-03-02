@@ -14,7 +14,7 @@ interface DispatchProps {
 export interface FavoritesListProps extends StateProps, DispatchProps {}
 
 function mapStateToProps(state: FavoritesState): StateProps {
-    const favoritesList = state.favoritesListReducers.favoritesList;
+    const favoritesList = state.favoritesList.favoritesList;
     return {favoritesList}
 }
 

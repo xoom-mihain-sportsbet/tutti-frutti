@@ -3,7 +3,11 @@ import { favoritesListReducers } from './reducers/favorites_list';
 import { quotesListReducers } from './reducers/quotes_list';
 
 export const store = configureStore({
-  reducer: {quotesListReducers, favoritesListReducers},
+  reducer: 
+  {
+    quotesList: quotesListReducers, 
+    favoritesList: favoritesListReducers
+  },
 });
 
 export type AppDispatch = typeof store.dispatch;

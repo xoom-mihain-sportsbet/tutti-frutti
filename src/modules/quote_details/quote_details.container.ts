@@ -10,7 +10,6 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    getQuoteFromState: typeof getQuoteFromState
     addQuoteToFavoritesList: typeof addQuoteToFavoritesList
     removeFromFavoritesList: typeof removeFromFavoritesList
 }
@@ -24,15 +23,14 @@ function getQuoteFromState(quotesList: Quote[], quoteIndex: string){
 }
 
 function mapStateToProps(state: RootState, ownProps: any ): StateProps {
-    let quoteList = state.quotesListReducers.quotesList;
+    let quoteList = state.quotesList.quotesList;
     const id = ownProps.id;
     const quote = getQuoteFromState(quoteList, id)!
-    const{favoritesList} = state.favoritesListReducers;
+    const{favoritesList} = state.favoritesList;
     return {quote, favoritesList}
 }
 
 const dispatchActions: DispatchProps = {
-    getQuoteFromState,
     addQuoteToFavoritesList,
     removeFromFavoritesList
 }

@@ -1,6 +1,6 @@
 
 export interface QuoteState {
-    quotesListReducers: {
+    quotesList: {
         quotesList: Quote[]
         isFetchingQuotes: boolean
         quotesListHasError: boolean

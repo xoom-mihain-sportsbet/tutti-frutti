@@ -21,7 +21,16 @@ interface DispatchProps {
 export interface QuotesListProps extends StateProps, DispatchProps {}
 
 function mapStateToProps(state: RootState ): StateProps {
-    const {quotesListReducers: {quotesList, isFetchingQuotes, quotesListHasError}, favoritesListReducers: {favoritesList}} = state;
+    const {
+        quotesList: {
+            quotesList, 
+            isFetchingQuotes, 
+            quotesListHasError
+        }, 
+        favoritesList: {
+            favoritesList
+        }
+    } = state;
     return {quotesList, isFetchingQuotes, quotesListHasError, favoritesList}
 }
 

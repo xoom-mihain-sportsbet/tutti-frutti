@@ -39,7 +39,7 @@ const cardAria = style({
 
 
 export const QuotesList: React.FunctionComponent<QuotesListProps> = props => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(props.isFetchingQuotes);
   const [quoteListWithFavorites, setQuoteListWithFavorites] = useState([] as Array<Quote>);
 
   React.useEffect(() => {
@@ -48,8 +48,12 @@ export const QuotesList: React.FunctionComponent<QuotesListProps> = props => {
 
   React.useEffect(() => {
     setIsLoading(props.isFetchingQuotes);
-    setQuoteListWithFavorites(processQuoteList(props.favoritesList, props.quotesList));
-  }, [props.isFetchingQuotes, props.favoritesList])
+  }, [props.isFetchingQuotes])
+
+  React.useEffect(() => {
+    const processedQuotesList = processQuoteList(props.favoritesList, props.quotesList);
+    setQuoteListWithFavorites(processedQuotesList);
+  }, [props.favoritesList])
 
   return (
     <div className={pageStyle}>
@@ -68,8 +72,7 @@ export const QuotesList: React.FunctionComponent<QuotesListProps> = props => {
         (
         <div className={cardAria}>
           <div className="card-group ml-5">
-            {quoteListWithFavorites.map((item) => { 
-              return(
+            {quoteListWithFavorites.map( item =>
                 <QuotesCards 
                   key={item.id} 
                   quote={item}
@@ -78,7 +81,7 @@ export const QuotesList: React.FunctionComponent<QuotesListProps> = props => {
                   removeFromFavoritesList = {props.removeFromFavoritesList}
                 />
               )
-            })}
+            }
           </div>
         </div>
         )}

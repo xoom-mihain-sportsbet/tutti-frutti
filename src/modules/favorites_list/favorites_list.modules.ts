@@ -1,5 +1,5 @@
 export interface FavoritesState {
-    favoritesListReducers: {
+    favoritesList: {
         favoritesList: Quote[]
     }
 }
